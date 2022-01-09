@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PatientManagement.Application.Interfaces;
 using PatientManagement.Models;
+using PatientManagement.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,24 @@ namespace PatientManagement.Application.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<User>> GetUsersListAsync()
+        public async Task<ResponseModel<IEnumerable<User>>> GetUsersListAsync()
         {
-            var users = await _context.Users.ToListAsync();
-            return users;
+            ResponseModel<IEnumerable<User>> response = new ResponseModel<IEnumerable<User>>();
+
+            try
+            {
+                var users = await _context.Users.ToListAsync();
+                response.Entity = users;
+                response.status = true;
+            }
+            catch(Exception e)
+            {
+                response.status = false;
+                response.ReturnMessage.Add(e.Message);
+            }
+            
+
+            return response;
         }
     }
 }

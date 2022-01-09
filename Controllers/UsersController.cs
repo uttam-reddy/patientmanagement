@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PatientManagement.Application.Interfaces;
 using PatientManagement.Models;
+using PatientManagement.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace PatientManagement.Controllers
         }
         // GET: api/<UsersController>
         [HttpGet]
-        public Task<IEnumerable<User>> Get()
+        public Task<ResponseModel<IEnumerable<User>>> Get()
         {
             return _iuserservice.GetUsersListAsync();
         }

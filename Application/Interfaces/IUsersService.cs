@@ -1,4 +1,5 @@
 ﻿using PatientManagement.Models;
+using PatientManagement.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace PatientManagement.Application.Interfaces
 {
     public interface IUsersService
     {
-        Task<IEnumerable<User>> GetUsersListAsync();
+        Task<ResponseModel<IEnumerable<User>>> GetUsersListAsync();
     }
 }
